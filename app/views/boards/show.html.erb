@@ -1,0 +1,14 @@
+<div class="mx-auto max-w-full px-24 py-12">
+  <div class="mb-5">
+    <%= link_to "Add New Member", new_board_board_user_path(@board), class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none" %>
+  </div>
+  <div class="mx-auto max-w-full" id="board" style="overflow-x: scroll"
+   data-controller="board"
+   data-list-positions-api-url="<%= api_board_list_positions_path(@board) %>"
+   data-board-id="<%= @board.id %>"
+   data-board-lists-url="<%= board_lists_path(@board) %>"
+   data-item-positions-api-url="<%= api_item_positions_path %>"
+   data-api-url="<%= api_board_lists_path(@board) %>">
+  </div>
+</div>
+<%= render "shared/modal" %>

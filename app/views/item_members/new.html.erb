@@ -1,0 +1,39 @@
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+  <div class="mx-auto max-w-3xl">
+    <div class="bg-white mt-8 px-8 py-8 rounded-xl drop-shadow-lg">
+      <%= form_with  url: item_item_members_path(@item), scope: nil, local: true do |f|%>
+        <div class="space-y-12">
+          <div class="border-b border-gray-900/10 pb-8">
+            <h1 class="text-base font-semibold leading-7 text-gray-900">Item Member</h1>
+            <p class="mt-1 text-sm leading-6 text-gray-600">This form adds/removes Item members</p>
+          </div>
+          <div class="border-b border-gray-900/10 pb-12">
+            <fieldset>
+              <legend class="text-lg font-medium text-gray-900">Members</legend>
+              <div class="mt-4 divide-y divide-gray-200 border-t border-b border-gray-200">
+                <% @item.list.board.members.uniq.each do |user| %>
+                  <div class="relative flex items-start py-4">
+                    <div class="min-w-0 flex-1 text-sm">
+                      <%= f.label :user_ids, class: "select-none font-medium text-gray-700" do %>
+                        <%= user.email %>
+                      <% end %>
+                    </div>
+                    <div class="ml-3 flex h-5 items-center">
+                      <%= f.check_box :user_ids, { multiple: true, checked: @item.members.include?(user)}, user.id, class: "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </fieldset>
+            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 flex items-center justify-end gap-x-6">
+          <%= link_to "Cancel", root_path, class: "border border-gray-300 rounded-md  px-4 py-2    text-sm font-semibold leading-6 text-gray-900" %>
+          <%= f.submit "Assign Member",  class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
